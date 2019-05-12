@@ -3,14 +3,12 @@ add_days <- function(x, no_days) UseMethod("add_days")
 
 #' @export
 add_days.Date <- function(x, no_days) {
-  yr <- as.integer(format(x, "%Y"))
-  bce <- FALSE
-  if(yr < 0) {
-    yr <- abs(yr) + 1
-    bce <- TRUE}
-  mn <- as.integer(format(x, "%m"))
-  dy <- as.integer(format(x, "%d"))
-  add_days2(yr, mn, dy, bce, no_days)
+  add_days(as_gregorian(x), no_days)
+}
+
+#' @export
+add_days.character <- function(x, no_days) {
+  add_days(as_gregorian(x), no_days)
 }
 
 #' @export
