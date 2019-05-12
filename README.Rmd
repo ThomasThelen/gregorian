@@ -47,8 +47,30 @@ as_gregorian("-99-7-12")
 
 ```{r}
 born <- as_gregorian("-99-7-12")
+```
 
+```{r}
+str(born)
+```
+
+
+```{r}
+get_date()
+```
+
+```{r}
 diff_days(born, get_date())
+```
+```{r}
+diff_dates(born, get_date())
+```
+
+
+```{r}
+diff_calendar(born, get_date())
+```
+```{r}
+diff_dates(born, get_date())
 ```
 
 ```{r}

@@ -40,9 +40,66 @@ as_gregorian("-99-7-12")
 
 ``` r
 born <- as_gregorian("-99-7-12")
+```
 
+``` r
+str(born)
+#> List of 6
+#>  $ year        : num 100
+#>  $ month       : int 7
+#>  $ day         : int 12
+#>  $ bce         : logi TRUE
+#>  $ day_name    :List of 2
+#>   ..$ name  : chr "Friday"
+#>   ..$ number: num 5
+#>  $ astronomical: chr "-99-07-12"
+#>  - attr(*, "class")= chr "gregorian_date"
+```
+
+``` r
+get_date()
+#> Sunday May 12, 2019 CE
+```
+
+``` r
 diff_days(born, get_date())
 #> [1] 773523
+```
+
+``` r
+diff_dates(born, get_date())
+#> $years
+#> [1] 2117
+#> 
+#> $months
+#> [1] 10
+#> 
+#> $days
+#> [1] 0
+```
+
+``` r
+diff_calendar(born, get_date())
+#> $years
+#> [1] 2117
+#> 
+#> $months
+#> [1] 9
+#> 
+#> $days
+#> [1] 31
+```
+
+``` r
+diff_dates(born, get_date())
+#> $years
+#> [1] 2117
+#> 
+#> $months
+#> [1] 10
+#> 
+#> $days
+#> [1] 0
 ```
 
 ``` r
