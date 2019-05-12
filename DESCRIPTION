@@ -1,0 +1,18 @@
+Package: gregorian
+Title: Manages gregorian dates and calculations
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Edgar",
+           family = "Ruiz",
+           role = c("aut", "cre"),
+           email = "edgararuiz@gmail.com")
+Description: Provides functions to handle gregorian dates and their calculations. It is able to handle dates before the common era (BCE).
+License: MIT License + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports:
+  methods
+Suggests: 
+  testthat (>= 2.1.0),
+  covr

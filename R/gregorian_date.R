@@ -1,0 +1,45 @@
+#' @export
+gregorian_date <- function(year_no, month_no, day_no, bce) {
+  # ------------------- Validations ----------------
+  ai <- as.logical(lapply(c(year_no, month_no, day_no), is_integer))
+  if(!all(ai)) stop("Year, month and day must be an integer number")
+  ai <- as.logical(lapply(c(year_no, month_no, day_no), function(x) x > 0)) 
+  if(!all(ai)) stop("Year, month and day must be a positive number")
+  bce <- as.logical(bce)
+  if(month_no > 12) stop("Month entry not valid. Valid numbers are between 1 and 12")
+  if(day_no > 31) stop("Day entry not valid. Valid numbers are between 1 and 31")
+  # -------------------------------------------------
+  dn <- day_name(year_no, month_no, day_no, bce)
+  astro <- paste0(
+    ifelse(bce, "-", ""), 
+    ifelse(bce, year_no - 1, year_no), "-" ,
+    ifelse(nchar(month_no) == 1, "0", ""), month_no, "-", 
+    ifelse(nchar(day_no) == 1, "0", ""), day_no
+    )
+  structure(
+    list(
+      year = year_no,
+      month = month_no,
+      day = day_no,
+      bce = bce,
+      day_name = dn,
+      astronomical = astro
+    ),
+    class = "gregorian_date"
+  )
+}
+
+setOldClass("gregorian_date")
+
+#' @export
+print.gregorian_date <- function(x, ...) {
+  cat(
+    paste0(
+      x$day_name$name, " ", 
+      month.name[x$month], " ", 
+      x$day, ", ", 
+      x$year," ", 
+      ifelse(x$bce, "BCE", "CE"))
+    )
+  invisible(x)
+}
