@@ -45,7 +45,7 @@ day_name <- function(year_no, month_no, day_no, bce) {
   no_days <- diff_days2(
     2019, 5, 12, FALSE, 
     year_no, month_no, day_no, bce
-    )
+    )$no_days
   new_day <- day_rotation(no_days, 7, 6) + 1
   list(
     name = day_names[new_day],
@@ -67,4 +67,9 @@ date_as_number <- function(year, month, day, bce) {
   day <- ifelse(nchar(day) < 2, paste0(rep(0, 2 - nchar(day)), day), day)
   x <- as.numeric(paste0(year, month, day))
   ifelse(bce, -x, x)
+}
+
+#' @export
+get_date <- function(){
+  as_gregorian(Sys.Date())
 }

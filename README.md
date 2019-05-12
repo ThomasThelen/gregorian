@@ -24,3 +24,28 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("edgararuiz/gregorian")
 ```
+
+``` r
+as.Date("-99-7-12")
+```
+
+    Error in charToDate(x) : 
+      character string is not in a standard unambiguous format
+
+``` r
+library(gregorian)
+as_gregorian("-99-7-12")
+#> Friday July 12, 100 BCE
+```
+
+``` r
+born <- as_gregorian("-99-7-12")
+
+diff_days(born, get_date())
+#> [1] 773523
+```
+
+``` r
+add_days(get_date(), 365)
+#> Monday May 11, 2020 CE
+```

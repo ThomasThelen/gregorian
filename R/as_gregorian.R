@@ -23,10 +23,10 @@ as_gregorian.character <- function(x, date_format = "%Y-%m-%d") {
     mn <- as.integer(xs[length(xs) - 1])
     yr <- as.integer(xs[length(xs) - 2])
     if(xs[[1]] == "") {
-      bce <- FALSE
+      bce <- TRUE
       yr <- yr + 1
     } else {
-      bce <- TRUE
+      bce <- FALSE
     }
     if(yr == 0) yr <- 1
     d <- gregorian_date(yr, mn, dy, bce)

@@ -12,7 +12,7 @@ test_that("Special diff_day cases", {
    diff_days(
      gregorian_date(2014, 2, 5, FALSE), 
      gregorian_date(2000, 2, 4, FALSE)
-     ), -5114
+     ), -5115
    )
  expect_equal(
    diff_days(
