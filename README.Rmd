@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/gregorian)](https://cran.r-project.org/package=gregorian)
-[![Build Status](https://travis-ci.org/edgararuiz/gregorian.svg?branch=master)](https://travis-ci.org/edgararuiz/gregorian)
+[![Build Status](https://api.travis-ci.com/edgararuiz/gregorian.svg?branch=master)](https://travis-ci.com/edgararuiz/gregorian)
 [![Coverage status](https://codecov.io/gh/edgararuiz/gregorian/branch/master/graph/badge.svg)](https://codecov.io/github/edgararuiz/gregorian?branch=master)
 <!-- badges: end -->
 
