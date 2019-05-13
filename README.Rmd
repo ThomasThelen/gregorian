@@ -11,6 +11,8 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+library(dplyr)
+library(purrr)
 ```
 # gregorian
 
@@ -20,7 +22,17 @@ knitr::opts_chunk$set(
 [![Coverage status](https://codecov.io/gh/edgararuiz/gregorian/branch/master/graph/badge.svg)](https://codecov.io/github/edgararuiz/gregorian?branch=master)
 <!-- badges: end -->
 
-Provides functions to convert between the gregoriann calendar dates and Gregorian dates.
+Provides a robust date object. It also provides date calculation functions that work on top of the new object.  Many of the functions seamlessly convert `Date` and `character` objects into the new `gregorian_date` object. 
+
+## Problem
+
+```{r, eval = FALSE}
+as.Date("-99-7-12")
+```
+```
+Error in charToDate(x) : 
+  character string is not in a standard unambiguous format
+```
 
 ## Installation
 
@@ -30,14 +42,7 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("edgararuiz/gregorian")
 ```
-
-```{r, eval = FALSE}
-as.Date("-99-7-12")
-```
-```
-Error in charToDate(x) : 
-  character string is not in a standard unambiguous format
-```
+## Gregorian object
 
 ```{r}
 library(gregorian)
@@ -58,6 +63,8 @@ str(born)
 get_date()
 ```
 
+## Date calculations
+
 ```{r}
 diff_days(born, get_date())
 ```
@@ -69,11 +76,60 @@ diff_dates(born, get_date())
 ```{r}
 diff_calendar(born, get_date())
 ```
-```{r}
-diff_dates(born, get_date())
-```
 
 ```{r}
 add_days(get_date(), 365)
 ```
 
+## Leap Year
+
+```{r}
+is_leap_year(2012)
+```
+```{r}
+is_leap_year(2019)
+```
+
+## Day Rotation
+
+```{r}
+# Sunday plus one day (1 == Monday)
+day_rotation(1, 7, 6) + 1
+```
+
+```{r}
+# Sunday plus 100 days (2 == Tuesday)
+day_rotation(100, 7, 6) + 1
+```
+
+## In the `tidyverse`
+
+```{r}
+library(dplyr)
+
+dt <- tribble(~dates,
+        as.Date("12/12/2014"),
+        as.Date("1/1/1") - 1000,
+        as.Date("1/1/1") - 365
+        )
+
+dt
+```
+
+```{r}
+library(purrr)
+
+dt %>%
+  mutate(new_date = map(dates, as_gregorian))
+```
+```{r}
+dt %>%
+  mutate(new_date = map_chr(dates, ~as_gregorian(.x)$full_date))
+```
+
+```{r}
+dt %>%
+  mutate(
+    today_diff = map2_dbl(dates, Sys.Date(), diff_days)
+    ) 
+```

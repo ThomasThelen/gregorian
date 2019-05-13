@@ -17,6 +17,13 @@ gregorian_date <- function(year_no, month_no, day_no, bce) {
     ifelse(nchar(month_no) == 1, "0", ""), month_no, "-", 
     ifelse(nchar(day_no) == 1, "0", ""), day_no
     )
+  output <- paste0(
+    dn$name, " ", 
+    month.name[month_no], " ", 
+    day_no, ", ", 
+    year_no," ", 
+    ifelse(bce, "BCE", "CE")
+    )
   structure(
     list(
       year = year_no,
@@ -24,7 +31,8 @@ gregorian_date <- function(year_no, month_no, day_no, bce) {
       day = day_no,
       bce = bce,
       day_name = dn,
-      astronomical = astro
+      astronomical = astro,
+      full_date = output
     ),
     class = "gregorian_date"
   )
@@ -34,13 +42,6 @@ setOldClass("gregorian_date")
 
 #' @export
 print.gregorian_date <- function(x, ...) {
-  cat(
-    paste0(
-      x$day_name$name, " ", 
-      month.name[x$month], " ", 
-      x$day, ", ", 
-      x$year," ", 
-      ifelse(x$bce, "BCE", "CE"))
-    )
+  cat(x$full_date)
   invisible(x)
 }
