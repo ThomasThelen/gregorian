@@ -3,6 +3,14 @@ as_gregorian <- function(x, date_format = "") UseMethod("as_gregorian")
 
 #' @export
 as_gregorian.Date <- function(x, date_format = "") {
+  if(length(x) == 1){
+    date_to_gregorian(x, date_format)
+  } else {
+    lapply(x, date_to_gregorian, date_format)
+  }
+}
+
+date_to_gregorian <- function(x, date_format = "") {
   yr <- as.integer(format(x, "%Y"))
   bce <- FALSE
   if(yr <= 0) {
@@ -16,6 +24,14 @@ as_gregorian.Date <- function(x, date_format = "") {
 
 #' @export
 as_gregorian.character <- function(x, date_format = "%Y-%m-%d") {
+  if(length(x) == 1){
+    character_to_gregorian(x, date_format)
+  } else {
+    lapply(x, character_to_gregorian, date_format)
+  }
+}
+  
+character_to_gregorian <- function(x, date_format = "%Y-%m-%d") {
   d <- NULL
   if(date_format == "%Y-%m-%d") {
     xs <- strsplit(x, "-")[[1]]
@@ -34,3 +50,5 @@ as_gregorian.character <- function(x, date_format = "%Y-%m-%d") {
   if(is.null(d)) stop("Requested date format is not supported")
   d
 }
+
+
