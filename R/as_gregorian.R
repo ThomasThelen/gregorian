@@ -50,5 +50,3 @@ character_to_gregorian <- function(x, date_format = "%Y-%m-%d") {
   if(is.null(d)) stop("Requested date format is not supported")
   d
 }
-
-

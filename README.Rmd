@@ -108,13 +108,23 @@ day_rotation(100, 7, 6) + 1
 library(dplyr)
 
 dt <- tribble(~dates,
-        as.Date("12/12/2014"),
+        as.Date("2014-12-12"),
         as.Date("1/1/1") - 1000,
         as.Date("1/1/1") - 365
         )
 
 dt
 ```
+```{r}
+dt %>%
+  extract_gregorian(dates, "full")
+```
+
+```{r}
+dt %>%
+  mutate(diff = diff_days(Sys.Date(), dates))
+```
+
 
 ```{r}
 library(purrr)
