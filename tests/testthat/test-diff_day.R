@@ -20,6 +20,18 @@ test_that("diff_days cases", {
     ), 27
   )
   expect_equal(
+    diff_days(
+      gregorian_date(100, 1, 1, TRUE), 
+      gregorian_date(100, 2, 1, TRUE)
+    ), 31
+  )
+  expect_equal(
+    diff_days(
+      gregorian_date(100, 2, 1, TRUE), 
+      gregorian_date(100, 1, 1, TRUE)
+    ), -31
+  )
+  expect_equal(
     diff_days(as.Date("2012-01-01"), as.Date("2012-01-10"))
     , 9)
 })
@@ -53,3 +65,12 @@ test_that("diff_calendar cases", {
     c(13, 11, 30)
   )
 })
+
+
+
+
+
+
+
+
+
